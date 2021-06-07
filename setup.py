@@ -12,7 +12,7 @@ setup(name='simalign',
       packages=['simalign'],
       install_requires=[
           "numpy",
-          "https://download.pytorch.org/whl/cpu/torch-1.5.0%2Bcpu-cp37-cp37m-linux_x86_64.whl",
+          "torch@https://download.pytorch.org/whl/cpu/torch-1.5.0%2Bcpu-cp37-cp37m-linux_x86_64.whl",
           "scipy",
           "transformers==3.1.0",
           "regex",
