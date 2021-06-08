@@ -44,7 +44,7 @@ class MBERTOnnx:
             "bert-base-multilingual-cased"
         )
         model_path = retrieve.url(
-            "https://github.com/nexxt-intelligence/simalign/releases/download/mbert-onnx-full/bert-base-multilingual-cased.onnx"
+            "https://github.com/nexxt-intelligence/simalign/releases/download/mbert-quantized/bert-base-multilingual-cased-quantized.onnx"
         )
         quantized_model_path = Path(model_path)
         self.model = create_model_for_provider(
