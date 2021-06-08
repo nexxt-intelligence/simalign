@@ -91,7 +91,7 @@ class SentenceAligner(object):
 		self.device = torch.device(device)
 
 		#self.embed_loader = EmbeddingLoader(model=self.model, device=self.device, layer=layer)
-		self.embed_loader = MBertOnnx()
+		self.embed_loader = MBERTOnnx()
 
 	@staticmethod
 	def get_max_weight_match(sim: np.ndarray) -> np.ndarray:
