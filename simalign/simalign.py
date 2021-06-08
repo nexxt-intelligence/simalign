@@ -20,6 +20,7 @@ from transformers import BertModel, BertTokenizer, XLMModel, XLMTokenizer, Rober
 from simalign.utils import get_logger
 
 LOG = get_logger(__name__)
+from mbert import MBertOnnx
 
 
 class EmbeddingLoader(object):
@@ -89,7 +90,8 @@ class SentenceAligner(object):
 		self.matching_methods = [all_matching_methods[m] for m in matching_methods]
 		self.device = torch.device(device)
 
-		self.embed_loader = EmbeddingLoader(model=self.model, device=self.device, layer=layer)
+		#self.embed_loader = EmbeddingLoader(model=self.model, device=self.device, layer=layer)
+		self.embed_loader = MBertOnnx()
 
 	@staticmethod
 	def get_max_weight_match(sim: np.ndarray) -> np.ndarray:
@@ -208,7 +210,7 @@ class SentenceAligner(object):
 			for i, wlist in enumerate(l2_tokens):
 				l2_b2w_map += [i for x in wlist]
 
-		vectors = self.embed_loader.get_embed_list([src_sent, trg_sent]).cpu().detach().numpy()
+		vectors = self.embed_loader.predict([src_sent, trg_sent])
 		vectors = [vectors[i, :len(bpe_lists[i])] for i in [0, 1]]
 
 		if self.token_type == "word":
