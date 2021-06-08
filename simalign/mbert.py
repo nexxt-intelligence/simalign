@@ -42,7 +42,7 @@ class MBERTOnnx:
         self.model = create_model_for_provider(quantized_model_path.as_posix(), "CPUExecutionProvider")
 
     def predict(self, text):
-        model_inputs = self.tokenizer(text, return_tensors="pt")
+        model_inputs = self.tokenizer(text, return_tensors="pt", padding=True, truncation=True)
         inputs_onnx = {k: v.cpu().detach().numpy() for k, v in model_inputs.items()}
         outputs = self.model.run(None, inputs_onnx)
         # Get hidden states
