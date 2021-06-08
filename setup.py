@@ -18,6 +18,9 @@ setup(name='simalign',
           "regex",
           "networkx==2.4",
           "scikit_learn==0.24.2",
+          "onnxruntime==1.4.0",
+          "retrieve"
+           
       ],
       python_requires=">=3.6.0",
       zip_safe=False)
