@@ -19,8 +19,8 @@ setup(name='simalign',
           "networkx==2.4",
           "scikit_learn==0.24.2",
           "onnxruntime==1.4.0",
-          "retrieve"
-           
+          "retrieve",
+          "psutil"
       ],
       python_requires=">=3.6.0",
       zip_safe=False)
