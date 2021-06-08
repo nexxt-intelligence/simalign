@@ -18,9 +18,9 @@ import torch
 from transformers import BertModel, BertTokenizer, XLMModel, XLMTokenizer, RobertaModel, RobertaTokenizer, XLMRobertaModel, XLMRobertaTokenizer, AutoConfig, AutoModel, AutoTokenizer
 
 from simalign.utils import get_logger
+from simalign.mbert import MBertOnnx
 
 LOG = get_logger(__name__)
-from mbert import MBertOnnx
 
 
 class EmbeddingLoader(object):
