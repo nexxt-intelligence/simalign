@@ -1,4 +1,5 @@
-from os import environ, cpu_count
+from os import environ
+from psutil import cpu_count
 
 # Constants from the performance optimization available in onnxruntime
 # It needs to be done before importing onnxruntime
