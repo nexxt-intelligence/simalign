@@ -11,12 +11,17 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from time import time
 
-from onnxruntime import (GraphOptimizationLevel, InferenceSession,
-                         SessionOptions, get_all_providers)
+from onnxruntime import (
+    GraphOptimizationLevel,
+    InferenceSession,
+    SessionOptions,
+    get_all_providers,
+)
 from tqdm import trange
 from transformers import BertTokenizerFast
 import retrieve
 from pathlib import Path
+
 
 def create_model_for_provider(model_path: str, provider: str) -> InferenceSession:
     assert (
@@ -36,16 +41,34 @@ def create_model_for_provider(model_path: str, provider: str) -> InferenceSessio
 
 class MBERTOnnx:
     def __init__(self):
-        self.tokenizer = BertTokenizerFast.from_pretrained('bert-base-multilingual-cased')
-        model_path = retrieve.url('https://github.com/nexxt-intelligence/simalign/releases/download/v0.1/bert.onnx')
+        self.tokenizer = BertTokenizerFast.from_pretrained(
+            "bert-base-multilingual-cased"
+        )
+        model_path = retrieve.url(
+            "https://github.com/nexxt-intelligence/simalign/releases/download/v0.1/bert.onnx"
+        )
         quantized_model_path = Path(model_path)
-        self.model = create_model_for_provider(quantized_model_path.as_posix(), "CPUExecutionProvider")
+        self.model = create_model_for_provider(
+            quantized_model_path.as_posix(), "CPUExecutionProvider"
+        )
 
     def predict(self, text):
-        if not isinstance(sent_batch[0], str):
-          model_inputs = self.tokenizer(text, is_split_into_words=True, padding=True, truncation=True, return_tensors="pt")
-				else:
-					model_inputs = self.tokenizer(text, is_split_into_words=False, padding=True, truncation=True, return_tensors="pt")
+        if not isinstance(text[0], str):
+            model_inputs = self.tokenizer(
+                text,
+                is_split_into_words=True,
+                padding=True,
+                truncation=True,
+                return_tensors="pt",
+            )
+        else:
+            model_inputs = self.tokenizer(
+                text,
+                is_split_into_words=False,
+                padding=True,
+                truncation=True,
+                return_tensors="pt",
+            )
         inputs_onnx = {k: v.cpu().detach().numpy() for k, v in model_inputs.items()}
         outputs = self.model.run(None, inputs_onnx)
         # Get hidden states
