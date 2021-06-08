@@ -26,7 +26,7 @@ class EmbeddingLoader(object):
 	def __init__(self, model: str="bert-base-multilingual-cased", device=torch.device('cpu'), layer: int=8):
 		TR_Models = {
 			'bert-base-uncased': (BertModel, BertTokenizer),
-			'bert-base-multilingual-cased': (BertModel, BertTokenizer),
+			'distilbert-base-multilingual-cased': (BertModel, BertTokenizer),
 			'bert-base-multilingual-uncased': (BertModel, BertTokenizer),
 			'xlm-mlm-100-1280': (XLMModel, XLMTokenizer),
 			'roberta-base': (RobertaModel, RobertaTokenizer),
@@ -76,7 +76,7 @@ class EmbeddingLoader(object):
 class SentenceAligner(object):
 	def __init__(self, model: str = "bert", token_type: str = "bpe", distortion: float = 0.0, matching_methods: str = "mai", device: str = "cpu", layer: int = 8):
 		model_names = {
-			"bert": "bert-base-multilingual-cased",
+			"bert": "distilbert-base-multilingual-cased",
 			"xlmr": "xlm-roberta-base"
 			}
 		all_matching_methods = {"a": "inter", "m": "mwmf", "i": "itermax", "f": "fwd", "r": "rev"}
