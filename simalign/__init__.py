@@ -1,1 +1,1 @@
-from .simalign import EmbeddingLoader, SentenceAligner
+from .simalign import SentenceAligner
