@@ -22,7 +22,7 @@ from simalign.mbert import MBERTOnnx
 
 LOG = get_logger(__name__)
 
-
+"""
 class EmbeddingLoader(object):
 	def __init__(self, model: str="bert-base-multilingual-cased", device=torch.device('cpu'), layer: int=8):
 		TR_Models = {
@@ -72,7 +72,7 @@ class EmbeddingLoader(object):
 				return outputs[:, 1:-1, :]
 		else:
 			return None
-
+"""
 
 class SentenceAligner(object):
 	def __init__(self, model: str = "bert", token_type: str = "bpe", distortion: float = 0.0, matching_methods: str = "mai", device: str = "cpu", layer: int = 8):
@@ -88,7 +88,7 @@ class SentenceAligner(object):
 		self.token_type = token_type
 		self.distortion = distortion
 		self.matching_methods = [all_matching_methods[m] for m in matching_methods]
-		self.device = torch.device(device)
+		#self.device = torch.device(device)
 
 		#self.embed_loader = EmbeddingLoader(model=self.model, device=self.device, layer=layer)
 		self.embed_loader = MBERTOnnx()
