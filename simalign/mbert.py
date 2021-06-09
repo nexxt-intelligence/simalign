@@ -20,6 +20,7 @@ from tqdm import trange
 from transformers import BertTokenizerFast
 import retrieve
 from pathlib import Path
+import numpy as np
 
 
 def create_model_for_provider(model_path: str, provider: str) -> InferenceSession:
