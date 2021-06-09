@@ -57,18 +57,16 @@ class MBERTOnnx:
                 text,
                 is_split_into_words=True,
                 padding=True,
-                truncation=True,
-                return_tensors="pt",
+                truncation=True
             )
         else:
             model_inputs = self.tokenizer(
                 text,
                 is_split_into_words=False,
                 padding=True,
-                truncation=True,
-                return_tensors="pt",
+                truncation=True
             )
-        inputs_onnx = {k: v.cpu().detach().numpy() for k, v in model_inputs.items()}
+        inputs_onnx = {k: np.array(v) for k, v in model_inputs.items()}
         outputs = self.model.run(None, inputs_onnx)
         # Get hidden states
         pooled = outputs[2:]
