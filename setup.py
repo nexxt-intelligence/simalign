@@ -12,7 +12,6 @@ setup(name='simalign',
       packages=['simalign'],
       install_requires=[
           "numpy==1.20.3",
-          "torch@https://download.pytorch.org/whl/cpu/torch-1.5.0%2Bcpu-cp38-cp38-linux_x86_64.whl",
           "scipy==1.6.3",
           "transformers==4.6.1",
           "regex",
